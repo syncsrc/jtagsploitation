@@ -10,9 +10,9 @@ Linux kernel patch to disable file system ACL checking, applied via JTAG using O
 
 
 # Known patches to generic_permission() linux kernel function
-#                             address     payload
-targets = {"yocto_3.8":    [0xC10AE011, 0x00000000],
-           "raspbian_3.x": [0xC01428F4, 0xE3A00000] }
+#                              address     payload
+targets = {"yocto_3.8":     [0xC10AE011, 0x00000000],
+           "raspbian_3.18": [0xC01428F4, 0xE3A00000] }
 
 
 import socket
