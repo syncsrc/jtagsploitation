@@ -4,10 +4,16 @@
 # OpenOCD RPC example Copyright (C) 2014 by Andreas Ortmann (ortmann@finf.uni-hannover.de)
 
 info = """
-Linux Getty preauthentication patch, applied via JTAG using OpenOCD.
-"""
+Linux Getty preauthentication patch, applied via JTAG using OpenOCD."""
 # Ported from slotscreamer inception module:
 # https://github.com/carmaa/inception/commit/d77988d7c1e9aca255728e1778a5fcde24ff3172
+
+
+# Known signatures for /sbin/getty executable
+#                      offset  signature1  signature2
+targets = {"yocto":    [0x7c9, 0x25002d2d, 0x63203a73],
+           "debian":   [0x4a6, 0x25002d2d, 0x63203a73],
+           "raspbian": [0x4ec, 0x00002d2d, 0x6c697475] }
 
 
 import socket
@@ -15,11 +21,6 @@ import itertools
 import time
 import argparse
 
-# Known signatures for /sbin/getty executable
-#                      offset  signature1  signature2
-targets = {"yocto":    [0x7c9, 0x25002d2d, 0x63203a73],
-           "debian":   [0x4a6, 0x25002d2d, 0x63203a73],
-           "raspbian": [0x4ec, 0x00002d2d, 0x6c697475] }
 
 def strToHex(data):
     return map(strToHex, data) if isinstance(data, list) else int(data, 16)
